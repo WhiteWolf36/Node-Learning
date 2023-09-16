@@ -129,6 +129,7 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+/vidly/
 /async-demo/
 /npm-demo/
-/vidly/
+
