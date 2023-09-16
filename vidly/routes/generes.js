@@ -5,6 +5,7 @@ const { Genere, validate } = require("../models/genere");
 const auth = require("../middleware/auth");
 const admin = require("../middleware/admin");
 const asyncMiddleware = require("../middleware/async");
+const validateObjectId = require("../middleware/validateObjectId");
 
 //Getting all the Generes
 router.get(
@@ -16,10 +17,7 @@ router.get(
 );
 
 //Getting a specific Genere
-router.get("/:id", async (req, res) => {
-  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
-    return res.status(404).send("Invalid Id!");
-  }
+router.get("/:id", validateObjectId, async (req, res) => {
   const genere = await Genere.find({ _id: req.params.id });
   if (!genere) return res.status(404).send("Genere Not Found!");
   res.send(genere);
